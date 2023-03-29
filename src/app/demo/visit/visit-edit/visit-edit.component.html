@@ -1,0 +1,394 @@
+<div class=" inset-0 flex flex-col min-w-0 overflow-hidden">
+    <mat-drawer-container
+        class="flex-auto h-full bg-card dark:bg-transparent inline-block p-2 bg-gradient-to-br from-green-400 to-blue-400"
+        class="flex-auto h-full bg-card inline-block p-2 bg-gray-100 " (backdropClick)="onBackdropClicked()">
+
+        <!-- Drawer -->
+        <mat-drawer *ngIf="opened" class="w-full md:w-100 dark:bg-gray-900" [mode]="'over'" [opened]="opened"
+            [position]="'end'" [hasBackdrop] = "'false'" [disableClose]="true" #matDrawer1>
+            <router-outlet></router-outlet>
+        </mat-drawer>
+
+
+        <mat-drawer-content class="flex flex-col">
+            <ng-container>
+                <div class="flex flex-auto overflow-hidden">
+                    <div class="flex flex-col flex-auto overflow-hidden sm:overflow-y-auto">
+                        <form #form="ngForm" class="flex flex-col w-full">
+
+                            <div class="flex flex-col flex-auto w-full">
+
+                                <div class="flex flex-wrap w-full mx-auto ">
+
+                                    <!-- Title and action buttons -->
+
+                                    <div class="grid grid-cols-1  xl:grid-cols-1 gap-8 w-full mt-2">
+                                        <div class="grid gap-8 md:grid-cols-1 sm:grid-flow-col xl:grid-flow-row">
+                                            <!-- Previous statement -->
+                                            <div
+                                                class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
+
+                                                <div class="flex items-center justify-between sm:mr-10">
+                                                    <div class="flex flex-col">
+                                                        <div
+                                                            class="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7">
+                                                            {{model.visitNumber}}
+                                                        </div>
+                                                        <div class="font-medium text-secondary"><span>ოფიციალური
+                                                                ვიზიტი</span></div>
+                                                    </div>
+                                                    <div class="ml-2">
+                                                        <div><span
+                                                                class="font-medium text-secondary">მომხმარებელი:&nbsp;</span>{{model.visitCreator}}
+                                                        </div>
+                                                        <div><span class="font-medium text-secondary">შექმნის
+                                                                თარიღი:&nbsp;</span>{{model.visitCreateDate}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full mt-8">
+                                        <!--  prosoner -->
+                                        <div
+                                            class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-8 w-full">
+                                            <div class="flex flex-col flex-auto p-6 bg-card rounded-2xl shadow">
+                                                <div class="flex items-center justify-between sm:mr-10">
+   
+                                                        <div class="text-xl font-semibold text-indigo-800 ">პატიმარი
+                                                        </div>
+
+                                                        <button class="justify-self-end " (click)="serchPrisoner()">
+                                                            <mat-icon class="icon-size-10 text-indigo-800"
+                                                                [svgIcon]="'change_circle'"></mat-icon>
+                                                        </button>
+
+                                                </div>
+                                                <ng-container>
+
+                                                    <div *ngIf="!prisoner.Id"
+                                                        class="relative flex items-center justify-center mt-2 items-center w-full h-full bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-2xl shadow">
+
+                                                        <button class=" " (click)="serchPrisoner()">
+                                                            <mat-icon class="icon-size-10"
+                                                                [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+                                                        </button>
+
+                                                    </div>
+                                                    <a *ngIf="prisoner.Id" (click)="open()"
+                                                        [routerLink]="['./side', prisoner.Id]" class="my-8 space-y-4">
+                                                        <div class="flex flex-col">
+                                                            <div class="flex items-center">
+                                                                <div
+                                                                    class="flex items-center justify-center w-10 h-10 rounded bg-indigo-100 text-indigo-800">
+                                                                    <mat-icon class="text-current"
+                                                                        [svgIcon]="'person'"></mat-icon>
+                                                                </div>
+                                                                <div class="flex-auto ml-4 leading-none">
+                                                                    <div class=" font-medium text-secondary">
+                                                                        {{prisoner.FirstName}} {{prisoner.LastName}}
+                                                                        {{prisoner.MiddleName}}
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex flex-col">
+                                                            <div class="flex items-center">
+                                                                <div
+                                                                    class="flex items-center justify-center justify-center w-10 h-10 rounded bg-indigo-100 text-indigo-800">
+                                                                    <mat-icon class="text-current"
+                                                                        [svgIcon]="'heroicons_outline:identification'"></mat-icon>
+                                                                </div>
+                                                                <div class="flex-auto ml-4 leading-none">
+                                                                    <div class="font-medium">010001001000</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex flex-col">
+                                                            <div class="flex items-center">
+                                                                <div
+                                                                    class="flex items-center justify-center justify-center w-10 h-10 rounded bg-indigo-100 text-indigo-800">
+                                                                    <mat-icon class="text-current"
+                                                                        [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                                                                </div>
+                                                                <div class="flex-auto ml-4 leading-none">
+                                                                    <div class="font-medium">12/10/2000</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex flex-col">
+                                                            <div class="flex items-center">
+                                                                <div
+                                                                    class="flex items-center justify-center justify-center w-10 h-10 rounded bg-indigo-100 text-indigo-800">
+                                                                    <mat-icon class="text-current"
+                                                                        [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                                                                </div>
+                                                                <div class="flex-auto ml-4 leading-none">
+                                                                    <div class="font-medium ">ქალი</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </ng-container>
+                                            </div>
+
+
+
+                                        </div>
+                                        <!-- Recent transactions table -->
+                                        <div
+                                            class="xl:col-span-3 md:grid-cols-2 lg:grid-cols-2 col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                            <div class="grid grid-cols-1 xl:grid-cols-1 gap-8 p-6">
+                                                <div class="text-xl font-semibold text-indigo-800">
+                                                    დეტალები</div>
+                                            </div>
+                                            <div
+                                                class="grid grid-cols-1 md:grid-cols-2 col-span-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 p-6">
+                                                <mat-form-field class="fuse-mat-dense w-full">
+                                                    <mat-label>კავშირის ტიპი </mat-label>
+                                                    <mat-select [(ngModel)]="model.visitorAndPrisonerConnectionTypeId"
+                                                        name="visitorAndPrisonerConnectionType">
+                                                        <mat-option></mat-option>
+                                                        <ng-container
+                                                            *ngFor="let visitorAndPrisonerConnectionType of visitorAndPrisonerConnectionTypes">
+                                                            <mat-option [value]="visitorAndPrisonerConnectionType.id">
+                                                                {{visitorAndPrisonerConnectionType.name}}
+                                                            </mat-option>
+                                                        </ng-container>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field class="fuse-mat-dense pr-2">
+                                                    <mat-label>ვიზიტის ქვე-ტიპი </mat-label>
+                                                    <mat-select [(ngModel)]="model.visitTypeId" name="citizenshipType">
+                                                        <mat-option></mat-option>
+                                                        <ng-container *ngFor="let visitType of visitTypes">
+                                                            <mat-option [value]="visitType.id">
+                                                                {{visitType.name}}
+                                                            </mat-option>
+                                                        </ng-container>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                                <mat-form-field class="fuse-mat-dense">
+                                                    <mat-label>ვიზიტის თარიღი</mat-label>
+                                                    <input matInput [(ngModel)]="model.visitDate" name="visitDate"
+                                                        [matDatepicker]="picker1">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+
+                                                <mat-form-field class="fuse-mat-dense">
+                                                    <mat-label>ლოკაცია/ტიპი </mat-label>
+                                                    <mat-select [(ngModel)]="model.visitLocationId"
+                                                        name="visitLocation">
+                                                        <mat-option></mat-option>
+                                                        <ng-container *ngFor="let visitLocation of visitLocations">
+                                                            <mat-option [value]="visitLocation.id">
+                                                                {{visitLocation.name}}
+                                                            </mat-option>
+                                                        </ng-container>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+
+
+
+
+                                                <mat-form-field class="fuse-mat-dense ">
+                                                    <mat-label>ვიზიტის ჩანიშვნის დრო</mat-label>
+                                                    <mat-select [(ngModel)]="model.visitTimeId"
+                                                        name="visitTime">
+                                                        <mat-option></mat-option>
+                                                        <ng-container *ngFor="let visitTime of visitTimes">
+                                                            <mat-option [value]="visitTime.id">
+                                                                {{visitTime.name}}
+                                                            </mat-option>
+                                                        </ng-container>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field class="fuse-mat-dense ">
+                                                    <mat-label>მისაწვდომი</mat-label>
+                                                    <input matInput [readonly]="'true'" name="freeSpace"
+                                                        [(ngModel)]="model.freeSpace">
+                                                </mat-form-field>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <!-- row 2 -->
+                                    <div
+                                        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 w-full mt-8">
+                                        <!--  prosoner -->
+                                        <div
+                                            class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 col-span-2 gap-8 w-full">
+                                            <div class="flex flex-col flex-auto p-6 bg-card rounded-2xl shadow">
+                                                <div class="flex items-center">
+                                                    <div class="flex flex-col">
+                                                        <div class="text-xl font-semibold text-indigo-800">ვიზიტორი
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="my-8 space-y-4">
+                                                    <div class="flex flex-col">
+                                                        <div class="flex items-center">
+                                                            <div
+                                                                class="flex items-center justify-center w-10 h-10 rounded bg-indigo-100 text-indigo-800">
+                                                                <mat-icon class="text-current"
+                                                                    [svgIcon]="'person'"></mat-icon>
+                                                            </div>
+                                                            <div class="flex-auto ml-4 leading-none">
+                                                                <div class=" font-medium text-secondary">გოგოლი ტაბიძე
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex flex-col">
+                                                        <div class="flex items-center">
+                                                            <div
+                                                                class="flex items-center justify-center justify-center w-10 h-10 rounded bg-indigo-100 text-indigo-800">
+                                                                <mat-icon class="text-current"
+                                                                    [svgIcon]="'heroicons_outline:identification'"></mat-icon>
+                                                            </div>
+                                                            <div class="flex-auto ml-4 leading-none">
+                                                                <div class="font-medium">010001001000</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex flex-col">
+                                                        <div class="flex items-center">
+                                                            <div
+                                                                class="flex items-center justify-center justify-center w-10 h-10 rounded bg-indigo-100 text-indigo-800">
+                                                                <mat-icon class="text-current"
+                                                                    [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                                                            </div>
+                                                            <div class="flex-auto ml-4 leading-none">
+                                                                <div class="font-medium">12/10/2000</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex flex-col">
+                                                        <div class="flex items-center">
+                                                            <div
+                                                                class="flex items-center justify-center justify-center w-10 h-10 rounded bg-indigo-100 text-indigo-800">
+                                                                <mat-icon class="text-current"
+                                                                    [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                                                            </div>
+                                                            <div class="flex-auto ml-4 leading-none">
+                                                                <div class="font-medium ">ქალი</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-col flex-auto p-6 bg-card rounded-2xl shadow">
+                                                <div class="flex items-center">
+                                                    <div class="flex flex-col">
+                                                        <div class="text-xl font-semibold text-indigo-800">ვიზიტორის
+                                                            დოკუმენტები
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="my-8 space-y-4">
+                                                    <div class="flex flex-col">
+                                                        <div class="flex items-center">
+    
+                                                        </div>
+                                                    </div>
+    
+    
+                                                    <div class="flex flex-col">
+                                                        <div class="flex items-center">
+    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="xl:col-span-2 sm:grid-cols-1 md:grid-cols-1 col-span-2 lg:grid-cols-1 col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                                            <div class="grid grid-cols-1 xl:grid-cols-1 gap-8 p-6">
+                                                <div class="text-xl font-semibold text-indigo-800">
+                                                    -----</div>
+                                            </div>
+                                            <div
+                                                class="flex flex-auto grid sm:grid-cols-1 md:grid-cols-2 col-span-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 p-6 items-center justify-center">
+
+
+
+                                                <button mat-flat-button [color]="'primary'">
+                                                    <mat-icon [svgIcon]="'heroicons_outline:printer'"></mat-icon>
+                                                    <span class="ml-2 mr-1">საშვის ბეჭდვა</span>
+                                                </button>
+
+
+                                                <mat-form-field class="fuse-mat-dense">
+                                                    <mat-label>პასუხისმგებელი პირი</mat-label>
+                                                    <input matInput [readonly]="'true'" name="visitCreator"
+                                                        [(ngModel)]="model.visitCreator">
+                                                </mat-form-field>
+
+                                                <mat-form-field class="fuse-mat-dense">
+                                                    <mat-label>ამობეჭდვის თარიღი/დრო</mat-label>
+                                                    <input matInput [(ngModel)]="model.visitDate" name="visitDate"
+                                                        [matDatepicker]="picker1">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+
+                                                <mat-form-field class="fuse-mat-dense xl:col-span-2 md:col-span-1">
+                                                    <mat-label>შენიშვნა </mat-label>
+                                                    <textarea [(ngModel)]="model.commnet" matInput [placeholder]="'Textarea'"></textarea>
+                                                </mat-form-field>
+
+
+                                                <mat-form-field class="fuse-mat-dense pr-2">
+                                                    <mat-label>სტატუსი</mat-label>
+                                                    <mat-select [(ngModel)]="model.visitStatusId" name="visitStatus">
+                                                        <ng-container *ngFor="let visitStatus of visitStatuses">
+                                                            <mat-option [value]="visitStatus.id">
+                                                                {{visitStatus.name}}
+                                                            </mat-option>
+                                                        </ng-container>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="flex items-center justify-between w-full border-t px-8 py-4">
+                                <button *ngIf="editMode" class="-ml-4" mat-button [color]="'warn'" (click) ="remove()">
+                                    წაშლა
+                                </button>
+                                <div *ngIf="!editMode" class="-ml-4"></div>
+                                <button [disabled]="!form.valid" mat-flat-button [color]="'primary'" (click) = "save()">
+                                    {{visitButtonText}}
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </ng-container>
+
+        </mat-drawer-content>
+    </mat-drawer-container>
+
+</div>

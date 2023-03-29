@@ -1,0 +1,150 @@
+<div class="flex flex-col w-full">
+
+    <!-- View mode -->
+    <ng-container >
+
+        
+        <!-- Header -->
+        <div class="relative w-full h-20 sm:h-28 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700">
+            <!-- Background -->
+
+
+
+
+            <div class="flex items-center justify-end w-full max-w-3xl mx-auto pt-6">
+                <a (click)="close()"
+                    mat-icon-button
+                    [matTooltip]="'დახურვა'"
+                    [routerLink]="['../']">
+                    <mat-icon
+                        class="text-white"
+                        [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                </a>
+            </div>
+            
+            <!-- Close button -->
+            
+        </div>
+
+        <div class="flex-col w-full">
+            <div class="relative flex flex-col flex-auto items-center p-6 pt-0 sm:p-12 sm:pt-0">
+                <div class="w-full max-w-3xl">
+
+                    <!-- <div class="flex flex-auto items-end -mt-10">
+
+                        <ng-container *ngIf="prisoner.Id">
+                        <div class="flex items-center ml-auto mb-1">
+                            <button
+                                mat-stroked-button
+                                >
+                                <mat-icon
+                                    class="icon-size-5"
+                                    [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
+                                <span class="ml-2">Edit</span>
+                            </button>
+                        </div> 
+
+                        </ng-container>
+
+                    </div> -->
+
+                    <div class="mt-5 text-4xl font-bold truncate">პატიმარი</div>
+
+
+                    <!-- <ng-container>
+                        <div class="flex sm:items-center">
+                            <mat-icon [svgIcon]="''"></mat-icon>
+                            <div class="ml-6 leading-6"> </div>
+                        </div>
+                    </ng-container> -->
+
+
+                    
+                    <div class="flex flex-col mt-4 pt-6 border-t space-y-8">
+                        <!-- Title -->
+                        <ng-container *ngIf="prisoner.Id">
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="'person'"></mat-icon>
+                                <div class="ml-6 leading-6">{{prisoner.FirstName}} {{prisoner.LastName}} {{prisoner.MiddleName}} </div>
+                            </div>
+                        </ng-container>
+    
+                        <!-- Company -->
+                        <ng-container *ngIf="prisoner.privateNumber">
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="'heroicons_outline:identification'"></mat-icon>
+                                <div class="ml-6 leading-6">{{prisoner.privateNumber}}</div>
+                            </div>
+                        </ng-container>
+                        <ng-container>
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                                <div class="ml-6 leading-6">{{prisoner.Birthdate}}</div>
+                            </div>
+                        </ng-container>
+                        <ng-container>
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                                <div class="ml-6 leading-6">{{prisoner.Gender}}</div>
+                            </div>
+                        </ng-container>
+                    </div>
+
+
+                    <div class="flex flex-col mt-4 pt-6 border-t space-y-8">
+                        <!-- Title -->
+                        <ng-container>
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="''"></mat-icon>
+                                <div class="ml-6 leading-6"> </div>
+                            </div>
+                        </ng-container>
+    
+                        <!-- Company -->
+                        <ng-container>
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="''"></mat-icon>
+                                <div class="ml-6 leading-6"> </div>
+                            </div>
+                        </ng-container>
+                        <ng-container>
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="''"></mat-icon>
+                                <div class="ml-6 leading-6"> </div>
+                            </div>
+                        </ng-container>
+                        <ng-container>
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="''"></mat-icon>
+                                <div class="ml-6 leading-6"> </div>
+                            </div>
+                        </ng-container>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        
+
+
+
+        <!-- <ng-container >
+            <div class="flex sm:items-center">
+                <mat-icon [svgIcon]="'heroicons_outline:cake'"></mat-icon>
+                <div class="ml-6 leading-6">{{contact.birthday | date:'longDate'}}</div>
+            </div>
+        </ng-container>
+
+        <ng-container >
+            <div class="flex">
+                <mat-icon [svgIcon]="'heroicons_outline:menu-alt-2'"></mat-icon>
+                <div
+                    class="max-w-none ml-6 prose prose-sm"
+                    [innerHTML]="contact.notes"></div>
+            </div>
+        </ng-container> -->
+    </ng-container>
+</div>

@@ -1,0 +1,41 @@
+<mat-drawer-container style="width: 100%; height: 100%;" [hasBackdrop]="false">
+
+    <mat-drawer class="w-full md:w-100 dark:bg-gray-900" [mode]="'over'" [opened]="drawerOpened"
+        [position]="'end'"  (openedChange) = "drawerOpenedChanged($event)" #matDrawer1>
+        <prisoner-info 
+        [prisoner]="prisonerModel"
+        (closeDrawer) = "closeDrawer()"
+        >
+        </prisoner-info>
+    </mat-drawer>
+
+    <mat-drawer-content  class="flex flex-col">
+        <div style="width: 100%; height: 100%;">
+            <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-material" (gridReady)="onGridReady($event)"
+                (rowDoubleClicked)="onRowDoubleClick($event)" [rowData]="rowData" [gridOptions]="gridOptions"
+                [columnDefs]="columnDefs" [rowDragManaged]="true" [rowDragMultiRow]="true" [rowSelection]="rowSelection"
+                [animateRows]="true" [suppressRowClickSelection]="true">
+            </ag-grid-angular>
+        </div>
+    </mat-drawer-content>
+
+
+</mat-drawer-container>
+
+<!-- <div style="width: 100%; height: 100%;">
+    <div style="width: 100%; height: 700px;">
+        <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-material" (gridReady)="onGridReady($event)"
+            (rowDoubleClicked)="onRowDoubleClick($event)" [rowData]="rowData" [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs" [rowDragManaged]="true" [rowDragMultiRow]="true" [rowSelection]="rowSelection"
+            [animateRows]="true" [suppressRowClickSelection]="true">
+        </ag-grid-angular>
+    </div>
+
+    <fuse-drawer style="height: 100%;" class="w-screen min-w-screen sm:w-950 sm:min-w-100 z-999" fixed [mode]="'over'"
+        [name]="'settingsDrawer'" [opened]="fuseDrawerOpened" [position]="'right'"
+        (openedChanged)="fuseDrawerOpenedChanged($event)" #settingsDrawer>
+        <prisoner-info [prisoner]="prisonerModel">
+        </prisoner-info>
+    </fuse-drawer>
+
+</div> -->
